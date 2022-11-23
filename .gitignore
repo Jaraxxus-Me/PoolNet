@@ -1,0 +1,6 @@
+results/*
+data/*
+.vscode
+*.pth
+*.zip
+*.jpg

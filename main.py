@@ -19,6 +19,9 @@ def get_test_info(sal_mode='e'):
     elif sal_mode == 's':
         image_root = './data/SOD/Imgs/'
         image_source = './data/SOD/test.lst'
+    elif sal_mode == 'b':
+        image_root = './data/BOP/Imgs/'
+        image_source = './data/BOP/test.lst'
     elif sal_mode == 't':
         image_root = './data/DUTS-TE/Imgs/'
         image_source = './data/DUTS-TE/test.lst'
@@ -78,9 +81,9 @@ if __name__ == '__main__':
     parser.add_argument('--train_list', type=str, default='')
 
     # Testing settings
-    parser.add_argument('--model', type=str, default=None) # Snapshot
-    parser.add_argument('--test_fold', type=str, default=None) # Test results saving folder
-    parser.add_argument('--sal_mode', type=str, default='e') # Test image dataset
+    parser.add_argument('--model', type=str, default='results/run-0/models/final.pth') # Snapshot
+    parser.add_argument('--test_fold', type=str, default='results/run-*-sal-b') # Test results saving folder
+    parser.add_argument('--sal_mode', type=str, default='b') # Test image dataset
 
     # Misc
     parser.add_argument('--mode', type=str, default='train', choices=['train', 'test'])
