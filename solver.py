@@ -19,8 +19,6 @@ class Solver(object):
         self.train_loader = train_loader
         self.test_loader = test_loader
         self.config = config
-        self.iter_size = config.iter_size
-        self.show_every = config.show_every
         self.lr_decay_epoch = [15,]
         self.build_model()
         if config.mode == 'test':
@@ -30,6 +28,9 @@ class Solver(object):
             else:
                 self.net.load_state_dict(torch.load(self.config.model, map_location='cpu'))
             self.net.eval()
+        else:
+            self.iter_size = config.iter_size
+            self.show_every = config.show_every
 
     # print the network information and parameter numbers
     def print_network(self, model, name):
@@ -72,7 +73,7 @@ class Solver(object):
                 preds = self.net(images)
                 pred = np.squeeze(torch.sigmoid(preds).cpu().data.numpy())
                 multi_fuse = 255 * pred
-                cv2.imwrite(os.path.join(self.config.test_fold, name[:-4] + '_' + mode_name + '.png'), multi_fuse)
+                cv2.imwrite(os.path.join(self.config.test_fold, name[:-4] + '.jpg'), multi_fuse)
         time_e = time.time()
         print('Speed: %f FPS' % (img_num/(time_e-time_s)))
         print('Test Done!')
